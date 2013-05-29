@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>HTML5 History in GWT</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Carlos Aguayo's blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+     
+                <h2>HTML5 History in GWT</h2>
+<p class="meta">29 Aug 2012</p>
+
+<div id="post">
+<p>One of the best features in HTML5 is the <a href='http://diveintohtml5.info/history.html'>History API</a> which lets you update the browser url without forcing a page refresh.</p>
+
+<p>GWT provides a built-in framework for browser history management. It comes up with the concept of &#8220;Activities&#8221; and &#8220;Places&#8221; which make a lot of sense and facilitate development. As Ray Ryan said, <a href='http://www.youtube.com/watch?v=PDuhR18-EdM#t=1m26s'>&#8220;get browser history right, and get it right early&#8221;</a>.</p>
+
+<p>A small shortcoming is that the default implementation is based in updating the fragment. Lucikly the GWT team made it easy to extend GWT and provide alternative implementations.</p>
+
+<p>When looking for ways to make GWT work with the new HTML5 history, I stumbled upon this f<a href='https://groups.google.com/d/msg/google-web-toolkit/xsf_GCnH36Q/iU8c80zsl5cJ'>orum post</a> where a good fella called <a href='https://plus.google.com/113945685385052458154/posts'>Thomas Broyer</a>&#160;helped with the following skeleton implementation.</p>
+<script src='https://gist.github.com/1883821.js'> </script>
+<p>In here I provide a working example of GWT and HTML5 History:</p>
+
+<p><strong><a href='http://gwthistoryhtml5.appspot.com/'>http://gwthistoryhtml5.appspot.com/</a></strong></p>
+
+<p>And you can find the code here:</p>
+
+<p><strong><a href='https://github.com/carlos-aguayo/html5gwthistory'>https://github.com/carlos-aguayo/html5gwthistory</a></strong></p>
+<iframe src='http://www.youtube.com/embed/Hw_BnmmM1RA?color=white&amp;theme=light' width='560' allowfullscreen='allowfullscreen' height='420'> </iframe>
+<p>Notice how when you move across the tabs, search or links, the URL updates without forcing a page refresh.</p>
+
+<p>The default implementation of Places in GWT uses a token/value pair separated by a colon, example:</p>
+
+<p><a href='http://gwthistoryhtml5.appspot.com/mail:starred'>http://gwthistoryhtml5.appspot.com/mail:starred</a></p>
+
+<p>So what this implementation does is to just replace the colon for a slash:</p>
+
+<p><a href='http://gwthistoryhtml5.appspot.com/mail/starred'>http://gwthistoryhtml5.appspot.com/mail/starred</a></p>
+
+<p>Firefox, Chrome and Safari support HTML5 History, however IE9 doesn&#8217;t have support for it. So instead I provide a &#8220;hashbang&#8221; implementation, so the URL above becomes:</p>
+
+<p><a href='http://gwthistoryhtml5.appspot.com/#!/mail/starred'>http://gwthistoryhtml5.appspot.com/#!/mail/starred</a></p>
+
+<p>All starts in:</p>
+<script src='https://gist.github.com/3521926.js'> </script>
+<p>Using deferred binding, we provide two implementations, when IE, we use the &#8220;HashBangHistorian&#8221;, and for any other browser, we can use the &#8220;Html5Historian&#8221;. Notice that it&#8217;s better to just hardcode the browser versions so that way we don&#8217;t have a &#8221;<a href='http://code.google.com/p/google-web-toolkit/wiki/ConditionalProperties'>deferred binding explosion</a>&#8221;.</p>
+
+<p>They are designed using the Template Method design pattern. Both of them extend from the &#8220;CustomHistorian&#8221; which does the heavy-lifting:</p>
+
+<p><a href='https://github.com/carlos-aguayo/html5gwthistory/blob/master/src/com/dreamskiale/client/history/CustomHistorian.java'>https://github.com/carlos-aguayo/html5gwthistory/blob/master/src/com/dreamskiale/client/history/CustomHistorian.java</a></p>
+
+<p>Both of them use JSNI to be able to access JavaScript directly. HTML5Historian then can directly invoke the HTML5 History API.</p>
+<script src='https://gist.github.com/3522213.js'> </script>
+<p>The implementation is quite simple and as you can see does not support deeper URL levels as it relies in the key/value pair of GWT places.</p>
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Carlos Aguayo<br />
+                  Software Engineer<br />
+                  carlos.aguayo@gmail.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="https://github.com/carlos-aguayo">github.com/carlos-aguayo</a><br />
+                  <a href="http://twitter.com/carlosaguayo81/">twitter.com/carlosaguayo81</a><br />
+                  <a href="http://www.linkedin.com/in/carlosaguayo">linkedin.com/in/carlosaguayo</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

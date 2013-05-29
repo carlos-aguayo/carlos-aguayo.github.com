@@ -1,13 +1,56 @@
----
-layout: default
-title: Carlos Aguayo's blog
----
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Carlos Aguayo's blog</title>
+        <meta name="viewport" content="width=device-width">
 
-<div id="home">
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Carlos Aguayo's blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+     
+                <div id="home">
   <h1>Blog Posts</h1>
   <ul class="posts">
-    {% for post in site.posts %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a><p>{{ post.excerpt }}</p></li>
-    {% endfor %}
+    
+      <li><span>29 Aug 2012</span> &raquo; <a href="/html5/gwt/history/2012/08/29/html5-history-in-gwt.html">HTML5 History in GWT</a><p><p>One of the best features in HTML5 is the <a href='http://diveintohtml5.info/history.html'>History API</a> which lets you update the browser url without forcing a page refresh.</p></p></li>
+    
+      <li><span>12 Apr 2012</span> &raquo; <a href="/html5/gwt/localstorage/2012/04/12/html5-localstorage-events-cross-window-message.html">Cross Window Messaging with HTML5 LocalStorage Events</a><p><p>Before HTML5, there wasn&#8217;t a reliable and straightforward way to have 2 or more browser windows talk to each other using purely client side code.</p></p></li>
+    
   </ul>
 </div>
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Carlos Aguayo<br />
+                  Software Engineer<br />
+                  carlos.aguayo@gmail.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="https://github.com/carlos-aguayo">github.com/carlos-aguayo</a><br />
+                  <a href="http://twitter.com/carlosaguayo81/">twitter.com/carlosaguayo81</a><br />
+                  <a href="http://www.linkedin.com/in/carlosaguayo">linkedin.com/in/carlosaguayo</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

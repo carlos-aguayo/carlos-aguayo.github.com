@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Cross Window Messaging with HTML5 LocalStorage Events</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Carlos Aguayo's blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+     
+                <h2>Cross Window Messaging with HTML5 LocalStorage Events</h2>
+<p class="meta">12 Apr 2012</p>
+
+<div id="post">
+<p>Before HTML5, there wasn&#8217;t a reliable and straightforward way to have 2 or more browser windows talk to each other using purely client side code.</p>
+
+<p>Use case:</p>
+
+<p>You have your web application open in two or more browser windows, say A, B and C. You want A, B and C to be able to talk to each other without having to go through a server.</p>
+
+<p>The way to achieve that, was having B and C being opened by A. Then B or C could invoke <a href='https://developer.mozilla.org/en/DOM/window.opener' title='window.opener'>window.opener</a> and sent a message to the parent window. However this communication is unidirectional and not very reliable.</p>
+
+<p>HTML5 introduced a concept called &#8221;<a href='https://developer.mozilla.org/en/DOM/window.postMessage'>postMessage</a>&#8221; where you can send a message to a target window. But this feature falls short from the desired behavior, as you still need to have a reference to the target window which you want to communicate to. Adding you the burden of keeping track of window references.</p>
+
+<p>HTML5 introduced the <a href='http://dev.w3.org/html5/webstorage/#the-localstorage-attribute'>LocalStorage</a> feature and a very nifty events feature along with it. In short words, any window can listen to localStorage changes.</p>
+
+<p>So, A, B and C can be listening to localStorage changes, and if A wants to send a message, all it has to do is store the message into localStorage, B and C will get notified of the change along with the stored value. It&#8217;s safe, reliable, bidirectional and there&#8217;s no need to keep track of window references.&#160;</p>
+
+<p>Take a look at the attached video referencing the jsffiddle at: <a href='http://jsfiddle.net/carlosaguayo/xgGZk/'>http://jsfiddle.net/carlosaguayo/xgGZk/</a></p>
+<iframe src='http://www.youtube.com/embed/CEkVsT4H8yc?color=white&amp;theme=light' width='560' allowfullscreen='allowfullscreen' height='420'> </iframe>
+<p>As you can see, any window can store a message in LocalStorage and all the other windows listening to it can receive the message.</p>
+
+<p>It&#8217;s a safe feature because you only listen to LocalStorage changes from the same origin.</p>
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Carlos Aguayo<br />
+                  Software Engineer<br />
+                  carlos.aguayo@gmail.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="https://github.com/carlos-aguayo">github.com/carlos-aguayo</a><br />
+                  <a href="http://twitter.com/carlosaguayo81/">twitter.com/carlosaguayo81</a><br />
+                  <a href="http://www.linkedin.com/in/carlosaguayo">linkedin.com/in/carlosaguayo</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>
